@@ -247,8 +247,9 @@ class RRD(SmartPlugin):
         for i, v in enumerate(data):
             if v[0] is not None:
                 tuples.append((mstart + i * mstep, v[0]))
+                iend = int( ( mstart + i * mstep ) / 1000 )
         reply['series'] = sorted(tuples)
-        reply['params'] = {'update': True, 'item': item, 'func': func, 'start': str(iend), 'end': str(iend + istep), 'step': str(istep), 'sid': sid}
+        reply['params'] = {'update': True, 'item': item, 'func': func, 'start': str(iend + istep), 'end': str(iend + 2 * istep), 'step': str(istep), 'sid': sid}
         reply['update'] = self.get_sh().now() + datetime.timedelta(seconds=istep)
         self.logger.warning("Returning series for {} from {} to {} with {} values".format(sid, istart, iend, len(tuples) ))
         return reply
