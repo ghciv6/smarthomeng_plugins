@@ -251,7 +251,7 @@ class RRD(SmartPlugin):
         reply['series'] = sorted(tuples)
         reply['params'] = {'update': True, 'item': item, 'func': func, 'start': str(iend + istep), 'end': str(iend + 2 * istep), 'step': str(istep), 'sid': sid}
         reply['update'] = self.get_sh().now() + datetime.timedelta(seconds=istep)
-        self.logger.warning("Returning series for {} from {} to {} with {} values".format(sid, istart, iend, len(tuples) ))
+        self.logger.info("Returning series for {} from {} to {} with {} values".format(sid, istart, iend, len(tuples) ))
         return reply
 
     def _single(self, func, start='1d', end='now', item=None):
